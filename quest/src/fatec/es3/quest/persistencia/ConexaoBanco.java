@@ -4,19 +4,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class ConexaoBanco {
+public abstract class ConexaoBanco {
 
 	private EntityManagerFactory emf;
-	private EntityManager manager;
+	protected EntityManager manager;
 
-	public ConexaoBanco() throws Exception {
+	public ConexaoBanco() {
 		this.emf = Persistence.createEntityManagerFactory("quest-persistence");
 		this.manager = emf.createEntityManager();
 		this.manager.getTransaction().begin();
-	}
-
-	public EntityManager getManager() {
-		return manager;
 	}
 
 	public void fechaConexao(boolean sucesso) {
@@ -31,8 +27,14 @@ public class ConexaoBanco {
 			this.manager.close();
 			this.emf.close();
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			//doNothing();
 		}
+	}
+	
+	@Override
+	protected void finalize() throws Throwable {
+		this.fechaConexao(false);
+		super.finalize();
 	}
 
 }

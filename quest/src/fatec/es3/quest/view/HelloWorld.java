@@ -1,10 +1,13 @@
 package fatec.es3.quest.view;
 
+import java.util.GregorianCalendar;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
 import fatec.es3.quest.model.entidades.Cachorro;
-import fatec.es3.quest.persistencia.ConexaoBanco;
+import fatec.es3.quest.model.entidades.Sexo;
 import fatec.es3.quest.persistencia.DAO;
 
 @ViewScoped
@@ -38,24 +41,25 @@ public class HelloWorld {
 	public void persisteCachorro() {
 
 		boolean sucesso = true;
-		ConexaoBanco con = null;
+		DAO dao = new DAO();
 		try {
-			con = new ConexaoBanco();
-
-			DAO dao = new DAO(con);
 
 			Cachorro cachorro = new Cachorro();
 			cachorro.setNome(this.nomeCachorro);
 			cachorro.setObservacoes("obs obs obs");
+			cachorro.setSexo(Sexo.FEMININO);
+			cachorro.setData(new GregorianCalendar());
 
-			dao.create(cachorro);
+			dao.persist(cachorro);
+			
+			cachorro.setObservacoes("oie oie oie");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			sucesso = false;
 		} finally {
-			if (con != null) {
-				con.fechaConexao(sucesso);
+			if (dao != null) {
+				dao.fechaConexao(sucesso);
 			}
 		}
 
