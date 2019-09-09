@@ -1,13 +1,11 @@
 package fatec.es3.quest.view;
 
-import java.util.GregorianCalendar;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import fatec.es3.quest.model.entidades.Cachorro;
-import fatec.es3.quest.model.entidades.Sexo;
+import fatec.es3.quest.model.entidades.Raca;
 import fatec.es3.quest.persistencia.DAO;
 
 @ViewScoped
@@ -32,7 +30,7 @@ public class HelloWorld {
 	public void setNomeCachorro(String nomeCachorro) {
 		this.nomeCachorro = nomeCachorro;
 	}
-	
+
 	@PostConstruct
 	private void init() {
 		this.mensagem = "Hello world!";
@@ -44,15 +42,39 @@ public class HelloWorld {
 		DAO dao = new DAO();
 		try {
 
-			Cachorro cachorro = new Cachorro();
-			cachorro.setNome(this.nomeCachorro);
-			cachorro.setObservacoes("obs obs obs");
-			cachorro.setSexo(Sexo.FEMININO);
-			cachorro.setData(new GregorianCalendar());
-
-			dao.persist(cachorro);
+//			Cachorro cachorro = new Cachorro();
+//			cachorro.setNome(this.nomeCachorro);
+//			cachorro.setObservacoes("obs obs obs");
+//			cachorro.setSexo(Sexo.FEMININO);
+//			cachorro.setData(new GregorianCalendar());
+//
+//			Raca raca = (Raca) dao.find(Raca.class, 1);
+//
+//			dao.persist(cachorro);
+//
+//			cachorro.setObservacoes("cachorro relacionado");
+//			cachorro.setRaca(raca);
+//
+//			List<Habilidade> lista = new LinkedList<Habilidade>();
+//			lista.add((Habilidade) dao.find(Habilidade.class, 1));
+//			lista.add((Habilidade) dao.find(Habilidade.class, 2));
+//			lista.add((Habilidade) dao.find(Habilidade.class, 3));
+//			lista.add((Habilidade) dao.find(Habilidade.class, 4));
+//
+//			cachorro.setHabilidades(lista);
+//
+//			Dono dono = new Dono();
+//			dono.setNome(Long.toString(new Date().getTime()));
+//
+//			dao.persist(dono);
+//
+//			cachorro.setDono(dono);
 			
-			cachorro.setObservacoes("oie oie oie");
+		
+			Raca raca = (Raca) dao.find(Raca.class, 1);
+			for(Cachorro cachorro : raca.getCachorros()) {
+				System.out.println(cachorro.getNome());
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

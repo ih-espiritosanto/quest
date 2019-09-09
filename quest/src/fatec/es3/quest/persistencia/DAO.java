@@ -9,7 +9,7 @@ public class DAO extends ConexaoBanco {
 	}
 	
 	public Object find(Class<?> clazz, Serializable id) {
-		return manager.find(clazz, id);
+		return manager.find(clazz, id); 
 	}
 	
 	public void merge(Object obj) {

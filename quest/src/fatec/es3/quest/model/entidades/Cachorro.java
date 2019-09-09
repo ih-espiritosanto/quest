@@ -1,6 +1,7 @@
 package fatec.es3.quest.model.entidades;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,6 +9,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -22,9 +27,19 @@ public class Cachorro {
 
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar data;
+
+	@ManyToOne
+	private Raca raca;
+
+	@ManyToMany
+	private List<Habilidade> habilidades;
+
+	@JoinColumn(unique = true)
+	@OneToOne
+	private Dono dono;
 
 	public int getId() {
 		return id;
@@ -64,6 +79,30 @@ public class Cachorro {
 
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
+	}
+
+	public Raca getRaca() {
+		return raca;
+	}
+
+	public void setRaca(Raca raca) {
+		this.raca = raca;
+	}
+
+	public List<Habilidade> getHabilidades() {
+		return habilidades;
+	}
+
+	public void setHabilidades(List<Habilidade> habilidades) {
+		this.habilidades = habilidades;
+	}
+
+	public Dono getDono() {
+		return dono;
+	}
+
+	public void setDono(Dono dono) {
+		this.dono = dono;
 	}
 
 }

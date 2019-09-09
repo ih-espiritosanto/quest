@@ -12,7 +12,10 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- Aqui são listadas todas as entidades -->
+        <class>fatec.es3.quest.model.entidades.Raca</class>
         <class>fatec.es3.quest.model.entidades.Cachorro</class>
+        <class>fatec.es3.quest.model.entidades.Habilidade</class>
+        <class>fatec.es3.quest.model.entidades.Dono</class>
 
         <properties>    
             <!-- Propriedades JDBC -->
