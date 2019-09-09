@@ -71,10 +71,10 @@ public class HelloWorld {
 //			cachorro.setDono(dono);
 			
 		
-			Raca raca = (Raca) dao.find(Raca.class, 1);
-			for(Cachorro cachorro : raca.getCachorros()) {
-				System.out.println(cachorro.getNome());
-			}
+//			Raca raca = (Raca) dao.find(Raca.class, 1);
+//			for(Cachorro cachorro : raca.getCachorros()) {
+//				System.out.println(cachorro.getNome());
+//			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
